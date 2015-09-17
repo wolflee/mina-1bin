@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+
+deploy_commands = YAML.load(File.open('config/servers.yml'))['servers'].map do |server|
+  "mina #{server} deploy"
+end
+
+system deploy_commands.join(" && ")
